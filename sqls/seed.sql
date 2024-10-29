@@ -26,3 +26,12 @@ INSERT INTO public.users
     );
 
 \echo "Fixtures loaded"
+
+DROP FUNCTION IF EXISTS public.search_users;
+CREATE FUNCTION public.search_users(search text)
+RETURNS SETOF public.users AS $$
+    SELECT *
+    FROM public.users
+    WHERE
+      username ilike ('%' || search || '%')
+$$ LANGUAGE sql STABLE;

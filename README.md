@@ -64,6 +64,22 @@ $ http --body POST http://localhost:8080/v1/graphql \
 }
 ```
 
+```sh
+$ http --body POST http://localhost:8080/v1/graphql \
+  Content-Type:application/json \
+  x-hasura-admin-secret:password \
+  query='{ search_users(args: {search: "user1"}) { id username } }'
+{
+    "data": {
+        "search_users": [
+            {
+                "id": 1,
+                "username": "user1"
+            }
+        ]
+    }
+}
+```
 
 ## Miscellaneous notes
 
